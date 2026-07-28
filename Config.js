@@ -54,15 +54,17 @@ const FG = {
 
     NO_RESPONDIO:"No respondió",
 
-    ENTREVISTA_AGENDADA:"Entrevista Agendada",
+   ENTREVISTA_AGENDADA: "Entrevista Agendada",
 
-    ENTREVISTA_REALIZADA:"Entrevista Realizada",
+ENTREVISTA_REALIZADA: "Entrevista Realizada",
 
-    DOCUMENTACION:"Documentación",
+NO_ASISTIO: "No asistió",
 
-    CONTRATADO:"Contratado",
+DOCUMENTACION: "Documentación",
 
-    DESCARTADO:"Descartado"
+CONTRATADO: "Contratado",
+
+DESCARTADO: "Descartado"
 
   },
 
