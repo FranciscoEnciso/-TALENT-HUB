@@ -30,26 +30,39 @@ function FG_Dashboard_getKPIs(){
 /**
  * Indicadores operativos.
  */
+function FG_Dashboard_countCurrentByStatus(status){
+
+  return FG_Repository_getCurrentApplications()
+
+    .filter(function(app){
+
+      return app.Estado === status;
+
+    })
+
+    .length;
+
+}
+
 function FG_Dashboard_getOperationalKPIs(){
 
   return {
 
-    nuevas: FG_Repository_getApplicationsByStatus(
+    nuevas: FG_Dashboard_countCurrentByStatus(
       FG.STATUS.NUEVA
-    ).length,
+    ),
 
-    contactados: FG_Repository_getApplicationsByStatus(
+    contactados: FG_Dashboard_countCurrentByStatus(
       FG.STATUS.CONTACTADO
-    ).length,
+    ),
 
-    entrevistas: FG_Repository_getApplicationsByStatus(
+    entrevistas: FG_Dashboard_countCurrentByStatus(
       FG.STATUS.ENTREVISTA_AGENDADA
-    ).length
+    )
 
   };
 
 }
-
 function FG_Dashboard_get(){
 
   return {
