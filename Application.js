@@ -33,9 +33,9 @@ const FG_APPLICATION_COLUMNS = {
  */
 function FG_Application_getSheet() {
 
-  return SpreadsheetApp
-    .getActive()
-    .getSheetByName("Postulaciones");
+  return FG_Utils_getSheet(
+  FG.SHEETS.POSTULACIONES
+);
 
 }
 
@@ -45,7 +45,7 @@ function FG_Application_getSheet() {
 function FG_Application_generateId(){
 
   return "POST-" + Utilities.formatDate(
-    new Date(),
+    FG_Utils_now(),
     Session.getScriptTimeZone(),
     "yyyyMMddHHmmss"
   );
@@ -66,7 +66,7 @@ function FG_Application_buildRow(app){
     app.candidateId || "",
 
     // C
-    new Date(),
+    FG_Utils_now(),
 
     // D
     app.numeroSucursal || "",
@@ -105,13 +105,13 @@ function FG_Application_buildRow(app){
     app.motivoSalidaAnterior || "",
 
     // P
-    app.prioridad || "Media",
+    app.prioridad || FG.PRIORITY.MEDIA,
 
     // Q
     app.score || "",
 
     // R
-    app.estado || "Nueva",
+    app.estado || FG.STATUS.NUEVA,
 
     // S
     app.motivoDescarte || "",
