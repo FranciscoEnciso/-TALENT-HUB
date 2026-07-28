@@ -15,12 +15,7 @@ function FG_Main_process(candidate, application) {
   const candidateId = FG_Candidate_save(candidate);
 
   // Auditoría del candidato
- FG_Audit_candidateCreated(candidateId);
-
-FG_Audit_applicationCreated(
-  applicationId,
-  candidateId
-);
+  FG_Audit_candidateCreated(candidateId);
 
   // Relacionar la postulación con el candidato
   application.candidateId = candidateId;
@@ -29,15 +24,11 @@ FG_Audit_applicationCreated(
   const applicationId = FG_Application_create(application);
 
   // Auditoría de la postulación
-  FG_Audit_candidateCreated(candidateId);
+  FG_Audit_applicationCreated(
+    applicationId,
+    candidateId
+  );
 
-FG_Audit_applicationCreated(
-  applicationId,
-  candidateId
-);
-
-  ;
-  
   return {
     candidateId: candidateId,
     applicationId: applicationId
