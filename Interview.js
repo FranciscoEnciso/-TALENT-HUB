@@ -25,27 +25,31 @@ function FG_Interview_schedule(data){
 
   sheet.appendRow([
 
-    interviewId,
+  interviewId,
 
-    data.applicationId,
+  data.applicationId,
 
-    data.candidateId,
+  data.candidateId,
 
-    data.fecha,
+  data.fecha,
 
-    data.hora,
+  data.hora,
 
-    data.entrevistador,
+  data.tipo || "Presencial",
 
-    "Agendada",
+  data.entrevistador,
 
-    "",
+  "",
 
-    "",
+  "",
 
-    FG_Utils_now()
+  "Agendada",
 
-  ]);
+  "",
+
+  FG_Utils_now()
+
+]);
 
   FG_State_change(
     data.applicationId,
@@ -91,11 +95,13 @@ function FG_Interview_finish(interviewId,resultado,observaciones){
 
   }
 
-  sheet.getRange(row,8).setValue(resultado);
+sheet.getRange(row,8).setValue("Sí");
 
-  sheet.getRange(row,9).setValue(observaciones);
+sheet.getRange(row,9).setValue(resultado);
 
-  sheet.getRange(row,7).setValue("Finalizada");
+sheet.getRange(row,10).setValue("Finalizada");
+
+sheet.getRange(row,11).setValue(observaciones);
 
 }
 
@@ -118,7 +124,9 @@ function FG_Interview_noShow(interviewId){
 
   }
 
-  sheet.getRange(row,7).setValue("No asistió");
+  sheet.getRange(row,8).setValue("No");
+
+sheet.getRange(row,10).setValue("No asistió");
 
 }
 
