@@ -60,7 +60,7 @@ ENTREVISTA_REALIZADA: "Entrevista Realizada",
 
 NO_ASISTIO: "No asistió",
 
-DOCUMENTACION: "Documentación",
+EN_DOCUMENTACION: "Documentación",
 
 CONTRATADO: "Contratado",
 
@@ -123,6 +123,10 @@ CANDIDATE_STATUS: {
   /*==========================================================
    ENCABEZADOS FORMULARIO
   ==========================================================*/
+/**
+ * No modificar estos encabezados.
+ * Deben coincidir exactamente con Google Forms.
+ */
 
   FORM_HEADERS:[
 
@@ -255,6 +259,22 @@ CANDIDATE_STATUS: {
 
   ],
 
+INTERVIEW_HEADERS:[
+
+  "Interview_ID",
+  "Application_ID",
+  "Candidate_ID",
+  "Fecha",
+  "Hora",
+  "Tipo",
+  "Entrevistador",
+  "Asistió",
+  "Resultado",
+  "Estado",
+  "Observaciones",
+  "Fecha_Registro"
+
+],
 
 
   /*==========================================================
