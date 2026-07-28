@@ -35,6 +35,7 @@ function FG_Interview_schedule(data){
 
   data.hora,
 
+  // TODO
   data.tipo || "Presencial",
 
   data.entrevistador,
@@ -58,9 +59,8 @@ function FG_Interview_schedule(data){
 
   FG_Audit_register({
 
-    module:"Interview",
-
-    action:"CREATE",
+    module: FG_AUDIT.MODULES.INTERVIEW,
+action: FG_AUDIT.ACTIONS.CREATE,
 
     candidateId:data.candidateId,
 
@@ -89,7 +89,7 @@ function FG_Interview_finish(interviewId,resultado,observaciones){
     interviewId
   );
 
-  if(row==-1){
+  if (row === -1){
 
     throw new Error("Entrevista no encontrada.");
 
@@ -107,7 +107,12 @@ sheet.getRange(
 );
 
 sheet.getRange(row,11).setValue(observaciones);
+const applicationId = sheet.getRange(row,2).getValue();
 
+FG_State_change(
+  applicationId,
+  FG.STATUS.ENTREVISTA_REALIZADA
+);
 }
 
 /**
@@ -132,6 +137,12 @@ function FG_Interview_noShow(interviewId){
   sheet.getRange(row,10).setValue(FG.STATUS.NO_ASISTIO);
   sheet.getRange(row,11).setValue("El candidato no asistió.");
 
+  const applicationId = sheet.getRange(row,2).getValue();
+
+FG_State_change(
+  applicationId,
+  FG.STATUS.NO_ASISTIO
+);
 }
 
 /**
@@ -145,7 +156,7 @@ function FG_Interview_get(interviewId){
     interviewId
   );
 
-  if(row==-1){
+  if (row === -1){
 
     return null;
 
@@ -196,14 +207,3 @@ function FG_Interview_noShow_test(){
   );
 
 }
-/**
- * ==========================================
- * FUNCIONES DE PRUEBA
- * Eliminar antes de liberar la versión 1.0
- * ==========================================
- */
-FG_Interview_test()
-
-FG_Interview_finish_test()
-
-FG_Interview_noShow_test()
