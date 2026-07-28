@@ -119,7 +119,7 @@ function FG_Repository_getApplicationsByStatus(status){
 
   return applications.filter(function(app){
 
-    return app.Estado === status;
+    return app.Estado === String(status);
 
   });
 
@@ -176,7 +176,7 @@ function FG_Repository_getApplicationsByCandidate(candidateId){
 
   return FG_Repository_getApplications().filter(function(app){
 
-    return app.Candidate_ID == candidateId;
+    return String(app.Candidate_ID) === String(candidateId);
 
   });
 
@@ -189,7 +189,7 @@ function FG_Repository_getInterviewsByCandidate(candidateId){
 
   return FG_Repository_getInterviews().filter(function(interview){
 
-    return interview.Candidate_ID == candidateId;
+    return String(interview.Candidate_ID) === String(candidateId);
 
   });
 
