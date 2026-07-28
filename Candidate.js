@@ -31,11 +31,54 @@ function FG_Candidate_getSheet(){
 }
 
 function FG_Candidate_generateId(){
+
+  const sheet = FG_Candidate_getSheet();
+
+  const lastRow = sheet.getLastRow();
+
+  if(lastRow <= 1){
+
+    return "CAND-000001";
+
+  }
+
+  const ids = sheet
+    .getRange(
+      2,
+      FG_CANDIDATE_COLUMNS.ID,
+      lastRow - 1,
+      1
+    )
+    .getValues()
+    .flat();
+
+  let maxId = 0;
+
+  ids.forEach(function(id){
+
+    const match = String(id).match(/^CAND-(\d+)$/);
+
+    if(match){
+
+      maxId = Math.max(
+        maxId,
+        Number(match[1])
+      );
+
+    }
+
+  });
+
+  return "CAND-" + Utilities.formatString(
+    "%06d",
+    maxId + 1
+  );
+
+}
   return "CAND-" + Utilities.formatString(
     "%06d",
     FG_Candidate_getSheet().getLastRow() - 1
   );
-}
 
 /**
  * Normaliza teléfonos.
