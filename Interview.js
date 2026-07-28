@@ -51,10 +51,10 @@ function FG_Interview_schedule(data){
 
 ]);
 
-  FG_State_change(
-    data.applicationId,
-    "Entrevista Agendada"
-  );
+ FG_State_change(
+  data.applicationId,
+  FG.STATUS.ENTREVISTA_AGENDADA
+);
 
   FG_Audit_register({
 
@@ -66,7 +66,7 @@ function FG_Interview_schedule(data){
 
     applicationId:data.applicationId,
 
-    newState:"Entrevista Agendada",
+    newState:FG.STATUS.ENTREVISTA_AGENDADA,
 
     description:"Entrevista agendada."
 
@@ -99,7 +99,12 @@ sheet.getRange(row,8).setValue("Sí");
 
 sheet.getRange(row,9).setValue(resultado);
 
-sheet.getRange(row,10).setValue("Finalizada");
+sheet.getRange(
+  row,
+  10
+).setValue(
+  FG.STATUS.ENTREVISTA_REALIZADA
+);
 
 sheet.getRange(row,11).setValue(observaciones);
 
@@ -126,7 +131,12 @@ function FG_Interview_noShow(interviewId){
 
   sheet.getRange(row,8).setValue("No");
 
-sheet.getRange(row,10).setValue("No asistió");
+sheet.getRange(
+  row,
+  10
+).setValue(
+  FG.STATUS.NO_ASISTIO
+);
 
 }
 
