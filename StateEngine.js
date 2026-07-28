@@ -11,10 +11,11 @@
  */
 const FG_STATE_FLOW = {
 
-  "Nueva": [
-    "Contactado",
-    "Descartado"
-  ],
+ "Nueva": [
+  "Contactado",
+  "Entrevista Agendada",
+  "Descartado"
+],
 
   "Contactado": [
     "No respondió",
