@@ -26,9 +26,20 @@ function FG_MyDay_getTodayInterviews(){
 /**
  * Resumen del día.
  */
+/**
+ * Total de tareas pendientes.
+ */
+function FG_MyDay_pendingCount(){
+
+  return FG_MyDay_get().length;
+
+}
+
 function FG_MyDay_summary(){
 
   return {
+
+    totalPendientes: FG_MyDay_pendingCount(),
 
     tareas: FG_MyDay_get(),
 
