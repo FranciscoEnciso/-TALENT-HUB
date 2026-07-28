@@ -42,9 +42,9 @@ const FG_AUDIT = {
  */
 function FG_Audit_getSheet(){
 
-  return SpreadsheetApp
-    .getActive()
-    .getSheetByName(FG.SHEETS.AUDITORIA);
+  return FG_Utils_getSheet(
+  FG.SHEETS.AUDITORIA
+);
 
 }
 
@@ -80,7 +80,7 @@ function FG_Audit_register(log){
 
   sheet.appendRow([
 
-    new Date(),
+    FG_Utils_now(),
 
     FG_Audit_getUser(),
 
@@ -193,7 +193,7 @@ function FG_Audit_test(){
 
     module:FG_AUDIT.MODULES.SYSTEM,
 
-    action:"TEST",
+    action:FG_AUDIT.ACTIONS.CREATE,
 
     description:"Prueba de Auditoría."
 
