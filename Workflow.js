@@ -11,15 +11,11 @@
  */
 function FG_Workflow_scheduleInterview(data){
 
-  const interviewId = FG_Interview_schedule(data);
+ const interviewId = FG_Interview_schedule(data);
 
-  FG_Task_createInterviewTask({
-    interviewId: interviewId,
-    applicationId: data.applicationId,
-    candidateId: data.candidateId
-  });
+FG_Task_generateToday();
 
-  return interviewId;
+return interviewId;
 
 }
 
@@ -37,7 +33,8 @@ function FG_Workflow_finishInterview(
     resultado,
     observaciones
   );
-
+ 
+  FG_Task_generateToday();
 }
 
 /**
@@ -46,7 +43,7 @@ function FG_Workflow_finishInterview(
 function FG_Workflow_noShow(interviewId){
 
   FG_Interview_noShow(interviewId);
-
+  FG_Task_generateToday();
 }
 
 /**
@@ -62,6 +59,8 @@ function FG_Workflow_changeState(
     newState
   );
 
+ FG_Task_generateToday();
+ 
 }
 
 /**
