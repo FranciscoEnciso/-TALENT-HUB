@@ -31,12 +31,30 @@ function FG_History_get(candidateId){
 
   return {
 
-    candidate: FG_Repository_getCandidate(candidateId),
+  candidate: FG_Repository_getCandidate(candidateId),
 
-    applications: FG_History_getApplications(candidateId),
+  applications: FG_History_getApplications(candidateId),
 
-    interviews: FG_History_getInterviews(candidateId)
+  interviews: FG_History_getInterviews(candidateId),
 
-  };
+  currentStatus: FG_History_getCurrentStatus(candidateId)
+
+};
+
+}
+
+/**
+ * Devuelve el último estado del candidato.
+ */
+function FG_History_getCurrentStatus(candidateId){
+
+  const applications =
+    FG_History_getApplications(candidateId);
+
+  if(applications.length === 0){
+    return null;
+  }
+
+  return applications[applications.length - 1].Estado;
 
 }
