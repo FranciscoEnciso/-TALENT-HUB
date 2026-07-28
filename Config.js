@@ -88,15 +88,21 @@ const FG = {
    SEMAFORO
   ==========================================================*/
 
-  TRAFFIC:{
+  TRAFFIC: {
 
-    VERDE:"Verde",
+  VERDE: "Verde",
+  AMARILLO: "Amarillo",
+  ROJO: "Rojo"
 
-    AMARILLO:"Amarillo",
+},
 
-    ROJO:"Rojo"
+CANDIDATE_STATUS: {
 
-  },
+  NUEVO: "Nuevo",
+  REPOSTULACION: "Repostulación"
+
+},
+
 
 
 
