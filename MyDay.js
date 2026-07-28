@@ -48,3 +48,10 @@ function FG_MyDay_summary(){
   };
 
 }
+function FG_MyDay_test(){
+
+  Logger.log(
+    JSON.stringify(FG_MyDay_summary(), null, 2)
+  );
+
+}

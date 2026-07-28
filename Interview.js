@@ -176,9 +176,9 @@ function FG_Interview_test(){
 
   const interviewId = FG_Interview_schedule({
 
-    applicationId:"POST-20260727013424",
+    applicationId:"POST-20260728014822",
 
-    candidateId:"CAND-000008",
+    candidateId:"CAND-000015",
 
     fecha:"2026-08-01",
 
@@ -191,12 +191,17 @@ function FG_Interview_test(){
   Logger.log(interviewId);
 
 }
+
 function FG_Interview_finish_test(){
 
   FG_Interview_finish(
-    "INT-20260727211556",
+
+    "INT-20260728015719",
+
     "Aprobado",
+
     "Entrevista satisfactoria"
+
   );
 
 }

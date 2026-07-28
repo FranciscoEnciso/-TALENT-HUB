@@ -255,6 +255,25 @@ function FG_Repository_getCurrentApplications(){
 
 }
 
+/**
+ * Devuelve únicamente la última postulación de cada candidato.
+ */
+function FG_Repository_getCurrentApplications(){
+
+  const applications = FG_Repository_getApplications();
+
+  const map = {};
+
+  applications.forEach(function(app){
+
+    map[app.Candidate_ID] = app;
+
+  });
+
+  return Object.values(map);
+
+}
+
 function FG_Repository_test(){
 
   const apps = FG_Repository_getApplications();

@@ -61,3 +61,11 @@ function FG_Dashboard_get(){
   };
 
 }
+
+function FG_Dashboard_test(){
+
+  Logger.log(
+    JSON.stringify(FG_Dashboard_get(), null, 2)
+  );
+
+}
