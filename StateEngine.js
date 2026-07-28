@@ -87,9 +87,9 @@ function FG_State_getNext(currentState){
  */
 function FG_State_change(applicationId, newState){
 
-  const sheet = SpreadsheetApp
-    .getActive()
-    .getSheetByName(FG.SHEETS.POSTULACIONES);
+  const sheet = FG_Utils_getSheet(
+  FG.SHEETS.POSTULACIONES
+);
 
   const data = sheet.getDataRange().getValues();
 
@@ -119,6 +119,12 @@ function FG_State_change(applicationId, newState){
           FG_APPLICATION_COLUMNS.ESTADO
         )
         .setValue(newState);
+        FG_Audit_stateChanged(
+  applicationId,
+  data[i][FG_APPLICATION_COLUMNS.CANDIDATE_ID - 1],
+  currentState,
+  newState
+);
 
       Logger.log(
         "Estado actualizado correctamente."
@@ -142,9 +148,9 @@ function FG_State_change(applicationId, newState){
  */
 function FG_State_get(applicationId){
 
-  const sheet = SpreadsheetApp
-    .getActive()
-    .getSheetByName(FG.SHEETS.POSTULACIONES);
+  const sheet = FG_Utils_getSheet(
+  FG.SHEETS.POSTULACIONES
+);
 
   const data = sheet.getDataRange().getValues();
 
@@ -170,7 +176,9 @@ function FG_State_test(){
 
   Logger.log(
 
-    FG_State_getNext("Nueva")
+    FG_State_getNext(
+  FG.STATUS.NUEVA
+)
 
   );
 
