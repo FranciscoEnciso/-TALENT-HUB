@@ -73,7 +73,7 @@ function FG_Task_generateToday(){
   FG_Task_clear();
 
   const applications =
-    FG_Repository_getApplications();
+  FG_Repository_getCurrentApplications();
 
   applications.forEach(function(app){
 
