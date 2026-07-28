@@ -123,20 +123,14 @@ function FG_Interview_noShow(interviewId){
     interviewId
   );
 
-  if(row==-1){
-
+  if(row == -1){
     throw new Error("Entrevista no encontrada.");
-
   }
 
   sheet.getRange(row,8).setValue("No");
-
-sheet.getRange(
-  row,
-  10
-).setValue(
-  FG.STATUS.NO_ASISTIO
-);
+  sheet.getRange(row,9).setValue("");
+  sheet.getRange(row,10).setValue(FG.STATUS.NO_ASISTIO);
+  sheet.getRange(row,11).setValue("El candidato no asistió.");
 
 }
 
@@ -186,3 +180,30 @@ function FG_Interview_test(){
   Logger.log(interviewId);
 
 }
+function FG_Interview_finish_test(){
+
+  FG_Interview_finish(
+    "INT-20260727211556",
+    "Aprobado",
+    "Entrevista satisfactoria"
+  );
+
+}
+function FG_Interview_noShow_test(){
+
+  FG_Interview_noShow(
+    "INT-20260727212246",
+  );
+
+}
+/**
+ * ==========================================
+ * FUNCIONES DE PRUEBA
+ * Eliminar antes de liberar la versión 1.0
+ * ==========================================
+ */
+FG_Interview_test()
+
+FG_Interview_finish_test()
+
+FG_Interview_noShow_test()
