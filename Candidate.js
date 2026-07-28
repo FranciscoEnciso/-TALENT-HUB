@@ -23,7 +23,11 @@ const FG_CANDIDATE_COLUMNS = {
 };
 
 function FG_Candidate_getSheet(){
-  return SpreadsheetApp.getActive().getSheetByName("Candidatos");
+
+  return FG_Utils_getSheet(
+    FG.SHEETS.CANDIDATOS
+  );
+
 }
 
 function FG_Candidate_generateId(){
@@ -61,7 +65,7 @@ function FG_Candidate_findByPhone(phone){
 
   for(let i=1;i<data.length;i++){
 
-    const current = FG_Candidate_normalizePhone(data[i][2]);
+    const current = FG_Candidate_normalizePhone(data[i][FG_CANDIDATE_COLUMNS.PHONE - 1]);
 
     if(current===normalized){
 
@@ -86,7 +90,7 @@ function FG_Candidate_exists(phone){
 
 function FG_Candidate_buildRow(c,id){
 
-  const d = new Date();
+  const d = FG_Utils_now();
 
   return [
 
@@ -116,13 +120,10 @@ function FG_Candidate_buildRow(c,id){
 
     0,
 
-    "Nuevo",
-
-    "",
-
-    "Verde",
-
-    ""
+    FG.CANDIDATE_STATUS.NUEVO,
+"",
+FG.TRAFFIC.VERDE,
+""
 
   ];
 
@@ -139,7 +140,7 @@ function FG_Candidate_create(c){
       sheet.getLastRow()+1,
       1,
       1,
-      17
+      FG_Candidate_buildRow(c,id).length
     )
     .setValues([
 
@@ -165,15 +166,27 @@ function FG_Candidate_update(c){
 
   const total = Number(
 
-    sheet.getRange(found.row,11).getValue()
+    sheet.getRange(
+  found.row,
+  FG_CANDIDATE_COLUMNS.TOTAL_APPLICATIONS
+).getValue()
 
   ) + 1;
 
-  sheet.getRange(found.row,10).setValue(new Date());
+  sheet.getRange(
+  found.row,
+  FG_CANDIDATE_COLUMNS.LAST_APPLICATION
+).setValue(FG_Utils_now());
 
-  sheet.getRange(found.row,11).setValue(total);
+  sheet.getRange(
+  found.row,
+  FG_CANDIDATE_COLUMNS.TOTAL_APPLICATIONS
+).setValue(total);
 
-  sheet.getRange(found.row,14).setValue("Repostulación");
+  sheet.getRange(
+  found.row,
+  FG_CANDIDATE_COLUMNS.STATUS
+).setValue(FG.CANDIDATE_STATUS.REPOSTULACION);
 
   return found.id;
 
