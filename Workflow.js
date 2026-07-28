@@ -1,17 +1,25 @@
 /**
  * ==========================================================
  * FG TALENT HUB
- * Workflow.js v1.0
+ * Workflow.js v2.0
  * Orquestador del proceso
  * ==========================================================
  */
 
 /**
- * Agenda una entrevista para una postulación.
+ * Agenda una entrevista.
  */
 function FG_Workflow_scheduleInterview(data){
 
-  return FG_Interview_schedule(data);
+  const interviewId = FG_Interview_schedule(data);
+
+  FG_Task_createInterviewTask({
+    interviewId: interviewId,
+    applicationId: data.applicationId,
+    candidateId: data.candidateId
+  });
+
+  return interviewId;
 
 }
 
@@ -33,7 +41,7 @@ function FG_Workflow_finishInterview(
 }
 
 /**
- * Marca una entrevista como No asistió.
+ * Registrar No Asistió.
  */
 function FG_Workflow_noShow(interviewId){
 
@@ -42,7 +50,7 @@ function FG_Workflow_noShow(interviewId){
 }
 
 /**
- * Cambia el estado de una postulación.
+ * Cambiar estado.
  */
 function FG_Workflow_changeState(
   applicationId,
@@ -57,23 +65,19 @@ function FG_Workflow_changeState(
 }
 
 /**
- * Obtiene una postulación.
+ * Obtener candidato.
  */
-function FG_Workflow_getApplication(applicationId){
+function FG_Workflow_getCandidate(candidateId){
 
-  return FG_Repository_getApplication(
-    applicationId
-  );
+  return FG_Repository_getCandidate(candidateId);
 
 }
 
 /**
- * Obtiene un candidato.
+ * Obtener postulación.
  */
-function FG_Workflow_getCandidate(candidateId){
+function FG_Workflow_getApplication(applicationId){
 
-  return FG_Repository_getCandidate(
-    candidateId
-  );
+  return FG_Repository_getApplication(applicationId);
 
 }
