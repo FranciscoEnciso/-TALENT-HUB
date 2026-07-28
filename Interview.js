@@ -171,9 +171,9 @@ function FG_Interview_test(){
 
   const interviewId = FG_Interview_schedule({
 
-    applicationId:"POST-000001",
+    applicationId:"POST-20260727013424",
 
-    candidateId:"CAND-000001",
+    candidateId:"CAND-000008",
 
     fecha:"2026-08-01",
 

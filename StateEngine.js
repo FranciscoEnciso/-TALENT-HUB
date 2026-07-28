@@ -114,7 +114,7 @@ function FG_State_change(applicationId, newState){
       }
 
       sheet
-        .getRange(
+        .getRangeF(
           row,
           FG_APPLICATION_COLUMNS.ESTADO
         )
