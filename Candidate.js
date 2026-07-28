@@ -75,11 +75,7 @@ function FG_Candidate_generateId(){
   );
 
 }
-  return "CAND-" + Utilities.formatString(
-    "%06d",
-    FG_Candidate_getSheet().getLastRow() - 1
-  );
-
+ 
 /**
  * Normaliza teléfonos.
  */
