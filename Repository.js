@@ -169,7 +169,69 @@ function FG_Repository_update(sheetName,rowNumber,row){
   );
 
 }
+/**
+ * Postulaciones por candidato.
+ */
+function FG_Repository_getApplicationsByCandidate(candidateId){
 
+  return FG_Repository_getApplications().filter(function(app){
+
+    return app.Candidate_ID == candidateId;
+
+  });
+
+}
+
+/**
+ * Entrevistas por candidato.
+ */
+function FG_Repository_getInterviewsByCandidate(candidateId){
+
+  return FG_Repository_getInterviews().filter(function(interview){
+
+    return interview.Candidate_ID == candidateId;
+
+  });
+
+}
+
+/**
+ * Total de candidatos.
+ */
+function FG_Repository_countCandidates(){
+
+  return FG_Repository_getCandidates().length;
+
+}
+
+/**
+ * Total de postulaciones.
+ */
+function FG_Repository_countApplications(){
+
+  return FG_Repository_getApplications().length;
+
+}
+
+/**
+ * Total de entrevistas.
+ */
+function FG_Repository_countInterviews(){
+
+  return FG_Repository_getInterviews().length;
+
+}
+
+/**
+ * Total de contratados.
+ */
+function FG_Repository_countHires(){
+
+  return FG_Repository_getApplicationsByStatus(
+    FG.STATUS.CONTRATADO
+  ).length;
+
+}
 /**
  * Prueba
  */
