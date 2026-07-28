@@ -1,8 +1,7 @@
-// @ts-nocheck
 /**
  * ==========================================================
  * FG TALENT HUB
- * Main.gs v2.1
+ * Main.gs v2.1Logger.log("====================================")
  * Orquestador Principal
  * ==========================================================
  */
@@ -16,9 +15,12 @@ function FG_Main_process(candidate, application) {
   const candidateId = FG_Candidate_save(candidate);
 
   // Auditoría del candidato
-  if (typeof FG_Audit_candidateCreated === "function") {
-    FG_Audit_candidateCreated(candidateId);
-  }
+ FG_Audit_candidateCreated(candidateId);
+
+FG_Audit_applicationCreated(
+  applicationId,
+  candidateId
+);
 
   // Relacionar la postulación con el candidato
   application.candidateId = candidateId;
@@ -27,20 +29,15 @@ function FG_Main_process(candidate, application) {
   const applicationId = FG_Application_create(application);
 
   // Auditoría de la postulación
-  if (typeof FG_Audit_applicationCreated === "function") {
-    FG_Audit_applicationCreated(
-      applicationId,
-      candidateId
-    );
-  }
+  FG_Audit_candidateCreated(candidateId);
 
-  Logger.log("====================================");
-  Logger.log("FG TALENT HUB");
-  Logger.log("Candidate ID: " + candidateId);
-  Logger.log("Application ID: " + applicationId);
-  Logger.log("Proceso terminado correctamente.");
-  Logger.log("====================================");
+FG_Audit_applicationCreated(
+  applicationId,
+  candidateId
+);
 
+  ;
+  
   return {
     candidateId: candidateId,
     applicationId: applicationId
@@ -116,4 +113,3 @@ function FG_Main_test(){
   Logger.log(result);
 
 }
-// Prueba de sincronización
