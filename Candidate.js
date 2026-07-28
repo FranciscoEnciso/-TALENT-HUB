@@ -33,7 +33,7 @@ function FG_Candidate_getSheet(){
 function FG_Candidate_generateId(){
   return "CAND-" + Utilities.formatString(
     "%06d",
-    Math.max(FG_Candidate_getSheet().getLastRow(),1)
+    FG_Candidate_getSheet().getLastRow() - 1
   );
 }
 
@@ -84,7 +84,7 @@ function FG_Candidate_findByPhone(phone){
 
 function FG_Candidate_exists(phone){
 
-  return FG_Candidate_findByPhone(phone)!=null;
+  return FG_Candidate_findByPhone(phone) !== null;
 
 }
 
@@ -135,19 +135,16 @@ function FG_Candidate_create(c){
 
   const id = FG_Candidate_generateId();
 
-  sheet
-    .getRange(
-      sheet.getLastRow()+1,
-      1,
-      1,
-      FG_Candidate_buildRow(c,id).length
-    )
-    .setValues([
+const row = FG_Candidate_buildRow(c, id);
 
-      FG_Candidate_buildRow(c,id)
-
-    ]);
-
+sheet
+  .getRange(
+    sheet.getLastRow() + 1,
+    1,
+    1,
+    row.length
+  )
+  .setValues([row]);
   return id;
 
 }
