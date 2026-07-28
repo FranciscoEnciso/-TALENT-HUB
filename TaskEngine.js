@@ -94,7 +94,7 @@ function FG_Task_generateToday(){
 
         FG_Task_add({
 
-          prioridad:"Alta",
+          prioridad: FG.PRIORITY.ALTA,
 
           tarea:"Llamar candidato",
 
@@ -122,7 +122,7 @@ function FG_Task_generateToday(){
 
         FG_Task_add({
 
-          prioridad:"Media",
+          prioridad:FG.PRIORITY.MEDIA,
 
           tarea:"Confirmar entrevista",
 
@@ -150,7 +150,7 @@ function FG_Task_generateToday(){
 
         FG_Task_add({
 
-          prioridad:"Alta",
+          prioridad: FG.PRIORITY.ALTA,
 
           tarea:"Reintentar llamada",
 
@@ -178,7 +178,7 @@ function FG_Task_generateToday(){
 
         FG_Task_add({
 
-          prioridad:"Alta",
+          prioridad: FG.PRIORITY.ALTA,
 
           tarea:"Recordar entrevista",
 
@@ -202,11 +202,11 @@ function FG_Task_generateToday(){
 
 
 
-      case FG.STATUS.DOCUMENTACION:
+      case FG.STATUS.EN_DOCUMENTACION:
 
         FG_Task_add({
 
-          prioridad:"Alta",
+          prioridad: FG.PRIORITY.ALTA,
 
           tarea:"Solicitar documentación",
 
@@ -232,7 +232,7 @@ function FG_Task_generateToday(){
 
   });
 
-  Logger.log("Mi_Dia actualizado.");
+  FG_Utils_log("Mi_Dia actualizado.");
 
 }
 
@@ -243,15 +243,30 @@ function FG_Task_getTasks(){
 
   const sheet = FG_Task_getSheet();
 
-  return sheet.getDataRange().getValues();
+  const data = sheet.getDataRange().getValues();
+
+return data.length > 1 ? data.slice(1) : [];
 
 }
 
 /**
  * Prueba
  */
+function FG_Task_getPending(){
+
+  return FG_Task_getTasks();
+
+}
+
+function FG_Task_getTodayInterviews(){
+
+  return FG_Repository_getApplicationsByStatus(
+    FG.STATUS.ENTREVISTA_AGENDADA
+  );
+
+}
 function FG_Task_test(){
 
-  FG_Task_generateToday();
+  Logger.log(FG_Task_getPending());
 
 }
