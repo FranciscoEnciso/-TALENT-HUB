@@ -5,7 +5,7 @@
  * ==========================================================
  */
 
-function onOpen() {
+function FG_Menu_onOpen() {
 
   SpreadsheetApp.getUi()
     .createMenu("FG Talent Hub")
@@ -27,10 +27,10 @@ function onOpen() {
 
     .addSeparator()
 
-    .addItem(
-      "Mi Día",
-      "FG_Menu_myDay"
-    )
+.addItem(
+  "Actualizar Mi Día",
+  "FG_Task_generateToday"
+)
 
     .addItem(
       "Dashboard",
@@ -67,12 +67,29 @@ function FG_Menu_noShow(){
 
 function FG_Menu_myDay(){
 
-  Logger.log(FG_MyDay_summary());
+  SpreadsheetApp.getUi().alert(
+  JSON.stringify(
+    FG_MyDay_summary(),
+    null,
+    2
+  )
+);
 
 }
 
 function FG_Menu_dashboard(){
 
-  Logger.log(FG_Dashboard_get());
+  SpreadsheetApp.getUi().alert(
+  JSON.stringify(
+    FG_Dashboard_get(),
+    null,
+    2
+  )
+);
+
+}
+function onOpen(){
+
+  FG_Menu_onOpen();
 
 }
