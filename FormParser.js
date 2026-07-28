@@ -59,7 +59,7 @@ function FG_FormParser_parse(headers, values){
 
   application:{
 
-    numeroSucursal: obtenerNumeroSucursal(row[FG_FORM.BRANCH]),
+    numeroSucursal: FG_FormParser_getBranchNumber(row[FG_FORM.BRANCH]),
     nombreSucursal: row[FG_FORM.BRANCH],
     municipio: row[FG_FORM.MUNICIPALITY],
     tiempoTraslado: row[FG_FORM.TRAVEL_TIME],
@@ -94,11 +94,11 @@ function FG_FormParser_parse(headers, values){
  * Resultado:
  * 268
  */
-function obtenerNumeroSucursal(texto){
+function FG_FormParser_getBranchNumber(texto){
 
   if(!texto){
 
-    return "";
+    return null;
 
   }
 
@@ -110,7 +110,7 @@ function obtenerNumeroSucursal(texto){
 
   }
 
-  return "";
+  return null;
 
 }
 
@@ -119,6 +119,10 @@ function obtenerNumeroSucursal(texto){
  */
 function FG_FormParser_test(){
 
-  Logger.log("FormParser cargado correctamente.");
+  Logger.log(
+  FG_FormParser_getBranchNumber(
+    "268 S.L.P. LOMAS"
+  )
+);
 
 }
