@@ -11,11 +11,22 @@
  */
 function FG_Utils_getSheet(sheetName){
 
-  return SpreadsheetApp
+  const sheet = SpreadsheetApp
     .getActive()
     .getSheetByName(sheetName);
 
+  if(!sheet){
+
+    throw new Error(
+      "No existe la hoja: " + sheetName
+    );
+
+  }
+
+  return sheet;
+
 }
+ 
 
 /**
  * Devuelve la fecha actual.
@@ -37,7 +48,7 @@ function FG_Utils_generateId(prefix){
 
   Utilities.formatDate(
 
-    new Date(),
+    FG_Utils_now(),
 
     Session.getScriptTimeZone(),
 
