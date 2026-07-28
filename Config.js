@@ -1,12 +1,24 @@
 /**
  * ==========================================================
- * FG TALENT HUB
- * Config.gs v3.0
- * Configuración Central
+ * TALENTRY
+ * Product Configuration
+ * ----------------------------------------------------------
+ * Configuración central del sistema.
+ * Toda constante global debe definirse aquí.
  * ==========================================================
  */
 
-const FG = {
+
+const TALENTRY = {
+  APP:{
+
+  NAME:"Talentry",
+
+  VERSION:"0.3.0",
+
+  TAGLINE:"The Recruiter's Operating System"
+
+},
 
   /*==========================================================
    HOJAS
@@ -40,8 +52,6 @@ const FG = {
 
   },
 
-
-
   /*==========================================================
    ESTADOS
   ==========================================================*/
@@ -67,6 +77,7 @@ CONTRATADO: "Contratado",
 DESCARTADO: "Descartado"
 
   },
+
 
 
 
@@ -304,3 +315,5 @@ INTERVIEW_HEADERS:[
   ]
 
 };
+
+const FG = TALENTRY;

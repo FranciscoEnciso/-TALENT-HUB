@@ -41,13 +41,7 @@ function FG_Menu_onOpen() {
 
 }
 
-function FG_Menu_scheduleInterview(){
 
-  SpreadsheetApp.getUi().alert(
-    "Pendiente: formulario para agendar entrevista."
-  );
-
-}
 
 function FG_Menu_finishInterview(){
 
@@ -91,5 +85,29 @@ function FG_Menu_dashboard(){
 function onOpen(){
 
   FG_Menu_onOpen();
+
+}
+function FG_Menu_scheduleInterview(){
+
+  const html = HtmlService
+    .createHtmlOutputFromFile("InterviewForm")
+    .setWidth(450)
+    .setHeight(520);
+
+  SpreadsheetApp
+    .getUi()
+    .showModalDialog(
+      html,
+      "Agendar entrevista"
+    );
+
+}
+function FG_Menu_scheduleInterviewSave(data){
+
+  const interviewId = FG_Interview_schedule(data);
+
+  FG_Task_generateToday();
+
+  return interviewId;
 
 }

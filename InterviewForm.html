@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+
+  <style>
+
+    body{
+      font-family:Arial,sans-serif;
+      padding:20px;
+    }
+
+    h2{
+      margin-top:0;
+    }
+
+    label{
+      display:block;
+      margin-top:12px;
+      font-weight:bold;
+    }
+
+    input,select{
+      width:100%;
+      padding:8px;
+      box-sizing:border-box;
+    }
+
+    button{
+      margin-top:20px;
+      width:100%;
+      padding:10px;
+      cursor:pointer;
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<h2>Agendar entrevista</h2>
+
+<label>Application_ID</label>
+<input id="applicationId">
+
+<label>Candidate_ID</label>
+<input id="candidateId">
+
+<label>Fecha</label>
+<input type="date" id="fecha">
+
+<label>Hora</label>
+<input type="time" id="hora">
+
+<label>Tipo</label>
+<select id="tipo">
+  <option>Presencial</option>
+  <option>Virtual</option>
+</select>
+
+<label>Entrevistador</label>
+<input id="entrevistador">
+
+<button onclick="guardar()">
+Guardar entrevista
+</button>
+
+<script>
+
+function guardar(){
+
+  const data = {
+
+    applicationId: document.getElementById("applicationId").value.trim(),
+
+    candidateId: document.getElementById("candidateId").value.trim(),
+
+    fecha: document.getElementById("fecha").value,
+
+    hora: document.getElementById("hora").value,
+
+    tipo: document.getElementById("tipo").value,
+
+    entrevistador: document.getElementById("entrevistador").value.trim()
+
+  };
+
+  google.script.run
+
+    .withSuccessHandler(function(interviewId){
+
+      alert(
+        "Entrevista creada correctamente.\n\nID: " + interviewId
+      );
+
+      google.script.host.close();
+
+    })
+
+    .withFailureHandler(function(error){
+
+      alert(
+        "Error:\n\n" + error.message
+      );
+
+    })
+
+    .FG_Menu_scheduleInterviewSave(data);
+
+}
+
+</script>
+
+</body>
+</html>
