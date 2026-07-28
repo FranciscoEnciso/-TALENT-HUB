@@ -1,0 +1,216 @@
+/**
+ * FG TALENT HUB - Candidate.gs v2.1
+ */
+
+const FG_CANDIDATE_COLUMNS = {
+  ID:1,
+  NAME:2,
+  PHONE:3,
+  AGE:4,
+  EDUCATION:5,
+  STUDYING:6,
+  MUNICIPALITY:7,
+  COLONY:8,
+  FIRST_DATE:9,
+  LAST_APPLICATION:10,
+  TOTAL_APPLICATIONS:11,
+  TOTAL_INTERVIEWS:12,
+  TOTAL_HIRES:13,
+  STATUS:14,
+  REHIRE:15,
+  TRAFFIC:16,
+  NOTES:17
+};
+
+function FG_Candidate_getSheet(){
+  return SpreadsheetApp.getActive().getSheetByName("Candidatos");
+}
+
+function FG_Candidate_generateId(){
+  return "CAND-" + Utilities.formatString(
+    "%06d",
+    Math.max(FG_Candidate_getSheet().getLastRow(),1)
+  );
+}
+
+/**
+ * Normaliza teléfonos.
+ */
+function FG_Candidate_normalizePhone(phone){
+
+  if(phone===null || phone===undefined){
+    return "";
+  }
+
+  return String(phone)
+    .replace(/\D/g,"")
+    .trim();
+
+}
+
+/**
+ * Busca candidato por teléfono.
+ */
+function FG_Candidate_findByPhone(phone){
+
+  const normalized = FG_Candidate_normalizePhone(phone);
+
+  const data = FG_Candidate_getSheet()
+    .getDataRange()
+    .getValues();
+
+  for(let i=1;i<data.length;i++){
+
+    const current = FG_Candidate_normalizePhone(data[i][2]);
+
+    if(current===normalized){
+
+      return {
+        row:i+1,
+        id:data[i][0]
+      };
+
+    }
+
+  }
+
+  return null;
+
+}
+
+function FG_Candidate_exists(phone){
+
+  return FG_Candidate_findByPhone(phone)!=null;
+
+}
+
+function FG_Candidate_buildRow(c,id){
+
+  const d = new Date();
+
+  return [
+
+    id,
+
+    c.nombre || "",
+
+    FG_Candidate_normalizePhone(c.telefono),
+
+    c.edad || "",
+
+    c.escolaridad || "",
+
+    c.estudia || "",
+
+    c.municipio || "",
+
+    c.colonia || "",
+
+    d,
+
+    d,
+
+    1,
+
+    0,
+
+    0,
+
+    "Nuevo",
+
+    "",
+
+    "Verde",
+
+    ""
+
+  ];
+
+}
+
+function FG_Candidate_create(c){
+
+  const sheet = FG_Candidate_getSheet();
+
+  const id = FG_Candidate_generateId();
+
+  sheet
+    .getRange(
+      sheet.getLastRow()+1,
+      1,
+      1,
+      17
+    )
+    .setValues([
+
+      FG_Candidate_buildRow(c,id)
+
+    ]);
+
+  return id;
+
+}
+
+function FG_Candidate_update(c){
+
+  const found = FG_Candidate_findByPhone(c.telefono);
+
+  if(!found){
+
+    return null;
+
+  }
+
+  const sheet = FG_Candidate_getSheet();
+
+  const total = Number(
+
+    sheet.getRange(found.row,11).getValue()
+
+  ) + 1;
+
+  sheet.getRange(found.row,10).setValue(new Date());
+
+  sheet.getRange(found.row,11).setValue(total);
+
+  sheet.getRange(found.row,14).setValue("Repostulación");
+
+  return found.id;
+
+}
+
+function FG_Candidate_save(c){
+
+  return FG_Candidate_exists(c.telefono)
+
+    ? FG_Candidate_update(c)
+
+    : FG_Candidate_create(c);
+
+}
+
+function FG_Candidate_test(){
+
+  Logger.log(
+
+    FG_Candidate_save({
+
+      nombre:"Prueba Producción",
+
+      telefono:"444-111-2233",
+
+      edad:25,
+
+      escolaridad:"Preparatoria",
+
+      estudia:"No",
+
+      municipio:"San Luis Potosí",
+
+      colonia:"Centro"
+
+    })
+
+  );
+
+}
