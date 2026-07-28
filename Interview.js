@@ -14,6 +14,21 @@ function FG_Interview_getSheet(){
 
 }
 
+const FG_INTERVIEW_COLUMNS = {
+  ID: 1,
+  APPLICATION_ID: 2,
+  CANDIDATE_ID: 3,
+  FECHA: 4,
+  HORA: 5,
+  TIPO: 6,
+  ENTREVISTADOR: 7,
+  ASISTIO: 8,
+  RESULTADO: 9,
+  ESTADO: 10,
+  OBSERVACIONES: 11,
+  FECHA_REGISTRO: 12
+};
+
 /**
  * Agenda una entrevista.
  */
@@ -95,9 +110,15 @@ function FG_Interview_finish(interviewId,resultado,observaciones){
 
   }
 
-sheet.getRange(row,8).setValue("Sí");
+sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.ASISTIO
+).setValue("Sí");
 
-sheet.getRange(row,9).setValue(resultado);
+sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.RESULTADO
+).setValue(resultado);
 
 sheet.getRange(
   row,
@@ -107,7 +128,10 @@ sheet.getRange(
 );
 
 sheet.getRange(row,11).setValue(observaciones);
-const applicationId = sheet.getRange(row,2).getValue();
+const applicationId = sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.APPLICATION_ID
+).getValue();
 
 FG_State_change(
   applicationId,
@@ -128,16 +152,28 @@ function FG_Interview_noShow(interviewId){
     interviewId
   );
 
-  if(row == -1){
+  if (row === -1){
     throw new Error("Entrevista no encontrada.");
   }
 
-  sheet.getRange(row,8).setValue("No");
-  sheet.getRange(row,9).setValue("");
-  sheet.getRange(row,10).setValue(FG.STATUS.NO_ASISTIO);
+  sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.ASISTIO
+).setValue("No");
+  sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.RESULTADO
+).setValue("");
+  sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.ESTADO
+).setValue(FG.STATUS.NO_ASISTIO);
   sheet.getRange(row,11).setValue("El candidato no asistió.");
 
-  const applicationId = sheet.getRange(row,2).getValue();
+  const applicationId = sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.APPLICATION_ID
+).getValue();
 
 FG_State_change(
   applicationId,
