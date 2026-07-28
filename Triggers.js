@@ -25,24 +25,21 @@ function FG_onFormSubmit(e) {
       .getRange(e.range.getRow(), 1, 1, lastColumn)
       .getValues()[0];
 
-    Logger.log("==================================");
-    Logger.log("Nueva respuesta recibida");
-    Logger.log("Fila: " + e.range.getRow());
-
+    
     FG_Main_processForm(
       headers,
       values
     );
 
-    Logger.log("Proceso terminado correctamente.");
 
   } catch (error) {
 
-    Logger.log("ERROR");
+    FG_Audit_error(
+  FG_AUDIT.MODULES.SYSTEM,
+  error
+);
 
-    Logger.log(error);
-
-    throw error;
+throw error;
 
   }
 
@@ -58,7 +55,7 @@ function FG_InstallTrigger(){
 
   triggers.forEach(trigger => {
 
-    if(trigger.getHandlerFunction() == "FG_onFormSubmit"){
+    if(trigger.getHandlerFunction() === "FG_onFormSubmit"){
 
       ScriptApp.deleteTrigger(trigger);
 
