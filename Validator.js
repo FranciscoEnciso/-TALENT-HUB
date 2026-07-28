@@ -59,7 +59,10 @@ function FG_Validator_checkHeaders(){
     FG.SHEETS.POSTULACIONES,
     FG.APPLICATION_HEADERS
   );
-
+  FG_Validator_validateHeader(
+  FG.SHEETS.ENTREVISTAS,
+  FG.INTERVIEW_HEADERS
+);
   FG_Validator_validateHeader(
     FG.SHEETS.AUDITORIA,
     FG.AUDIT_HEADERS
@@ -177,7 +180,9 @@ function FG_Validator_runFullCheck(){
   FG_Validator_checkDuplicateHeaders(
     FG.SHEETS.POSTULACIONES
   );
-
+  FG_Validator_checkDuplicateHeaders(
+  FG.SHEETS.ENTREVISTAS
+);
   FG_Validator_checkDuplicateHeaders(
     FG.SHEETS.AUDITORIA
   );
