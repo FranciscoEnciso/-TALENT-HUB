@@ -10,7 +10,7 @@
  */
 function FG_Task_getSheet(){
 
-  return FG_Utils_getSheet(FG.SHEETS.MI_DIA);
+  return FG_Utils_getSheet(TALENTRY.SHEETS.MI_DIA);
 
 }
 
@@ -90,11 +90,11 @@ function FG_Task_generateToday(){
 
     switch(app.Estado){
 
-      case FG.STATUS.NUEVA:
+      case TALENTRY.STATUS.NUEVA:
 
         FG_Task_add({
 
-          prioridad: FG.PRIORITY.ALTA,
+          prioridad: TALENTRY.PRIORITY.ALTA,
 
           tarea:"Llamar candidato",
 
@@ -118,11 +118,11 @@ function FG_Task_generateToday(){
 
 
 
-      case FG.STATUS.CONTACTADO:
+      case TALENTRY.STATUS.CONTACTADO:
 
         FG_Task_add({
 
-          prioridad:FG.PRIORITY.MEDIA,
+          prioridad:TALENTRY.PRIORITY.MEDIA,
 
           tarea:"Confirmar entrevista",
 
@@ -146,11 +146,11 @@ function FG_Task_generateToday(){
 
 
 
-      case FG.STATUS.NO_RESPONDIO:
+      case TALENTRY.STATUS.NO_RESPONDIO:
 
         FG_Task_add({
 
-          prioridad: FG.PRIORITY.ALTA,
+          prioridad: TALENTRY.PRIORITY.ALTA,
 
           tarea:"Reintentar llamada",
 
@@ -174,11 +174,11 @@ function FG_Task_generateToday(){
 
 
 
-      case FG.STATUS.ENTREVISTA_AGENDADA:
+      case TALENTRY.STATUS.ENTREVISTA_AGENDADA:
 
         FG_Task_add({
 
-          prioridad: FG.PRIORITY.ALTA,
+          prioridad: TALENTRY.PRIORITY.ALTA,
 
           tarea:"Recordar entrevista",
 
@@ -202,11 +202,11 @@ function FG_Task_generateToday(){
 
 
 
-      case FG.STATUS.EN_DOCUMENTACION:
+      case TALENTRY.STATUS.EN_DOCUMENTACION:
 
         FG_Task_add({
 
-          prioridad: FG.PRIORITY.ALTA,
+          prioridad: TALENTRY.PRIORITY.ALTA,
 
           tarea:"Solicitar documentación",
 
@@ -261,7 +261,7 @@ function FG_Task_getPending(){
 function FG_Task_getTodayInterviews(){
 
   return FG_Repository_getApplicationsByStatus(
-    FG.STATUS.ENTREVISTA_AGENDADA
+    TALENTRY.STATUS.ENTREVISTA_AGENDADA
   );
 
 }

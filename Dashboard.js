@@ -49,15 +49,15 @@ function FG_Dashboard_getOperationalKPIs(){
   return {
 
     nuevas: FG_Dashboard_countCurrentByStatus(
-      FG.STATUS.NUEVA
+      TALENTRY.STATUS.NUEVA
     ),
 
     contactados: FG_Dashboard_countCurrentByStatus(
-      FG.STATUS.CONTACTADO
+      TALENTRY.STATUS.CONTACTADO
     ),
 
     entrevistas: FG_Dashboard_countCurrentByStatus(
-      FG.STATUS.ENTREVISTA_AGENDADA
+      TALENTRY.STATUS.ENTREVISTA_AGENDADA
     )
 
   };

@@ -43,8 +43,8 @@ const FG_AUDIT = {
 function FG_Audit_getSheet(){
 
   return FG_Utils_getSheet(
-  FG.SHEETS.AUDITORIA
-);
+    TALENTRY.SHEETS.AUDITORIA
+  );
 
 }
 
@@ -67,7 +67,7 @@ function FG_Audit_getUser(){
 
   catch(e){}
 
-  return FG.SYSTEM.DEFAULT_RECRUITER;
+  return TALENTRY.SYSTEM.DEFAULT_RECRUITER;
 
 }
 

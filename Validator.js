@@ -27,9 +27,9 @@ function FG_Validator_checkSheets(){
 
   const spreadsheet = SpreadsheetApp.getActive();
 
-  Object.keys(FG.SHEETS).forEach(function(key){
+  Object.keys(TALENTRY.SHEETS).forEach(function(key){
 
-    const sheetName = FG.SHEETS[key];
+    const sheetName = TALENTRY.SHEETS[key];
 
     const sheet = spreadsheet.getSheetByName(sheetName);
 
@@ -51,21 +51,21 @@ function FG_Validator_checkSheets(){
 function FG_Validator_checkHeaders(){
 
   FG_Validator_validateHeader(
-    FG.SHEETS.CANDIDATOS,
-    FG.CANDIDATE_HEADERS
+    TALENTRY.SHEETS.CANDIDATOS,
+    TALENTRY.CANDIDATE_HEADERS
   );
 
   FG_Validator_validateHeader(
-    FG.SHEETS.POSTULACIONES,
-    FG.APPLICATION_HEADERS
+    TALENTRY.SHEETS.POSTULACIONES,
+    TALENTRY.APPLICATION_HEADERS
   );
   FG_Validator_validateHeader(
-  FG.SHEETS.ENTREVISTAS,
-  FG.INTERVIEW_HEADERS
+  TALENTRY.SHEETS.ENTREVISTAS,
+  TALENTRY.INTERVIEW_HEADERS
 );
   FG_Validator_validateHeader(
-    FG.SHEETS.AUDITORIA,
-    FG.AUDIT_HEADERS
+    TALENTRY.SHEETS.AUDITORIA,
+    TALENTRY.AUDIT_HEADERS
   );
 
 }
@@ -174,17 +174,17 @@ function FG_Validator_runFullCheck(){
   FG_Validator_checkHeaders();
 
   FG_Validator_checkDuplicateHeaders(
-    FG.SHEETS.CANDIDATOS
+    TALENTRY.SHEETS.CANDIDATOS
   );
 
   FG_Validator_checkDuplicateHeaders(
-    FG.SHEETS.POSTULACIONES
+    TALENTRY.SHEETS.POSTULACIONES
   );
   FG_Validator_checkDuplicateHeaders(
-  FG.SHEETS.ENTREVISTAS
+  TALENTRY.SHEETS.ENTREVISTAS
 );
   FG_Validator_checkDuplicateHeaders(
-    FG.SHEETS.AUDITORIA
+    TALENTRY.SHEETS.AUDITORIA
   );
 
   Logger.log("VALIDACIÓN COMPLETA EXITOSA.");

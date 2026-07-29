@@ -88,7 +88,7 @@ function FG_State_getNext(currentState){
 function FG_State_change(applicationId, newState){
 
   const sheet = FG_Utils_getSheet(
-  FG.SHEETS.POSTULACIONES
+  TALENTRY.SHEETS.POSTULACIONES
 );
 
   const data = sheet.getDataRange().getValues();
@@ -149,7 +149,7 @@ function FG_State_change(applicationId, newState){
 function FG_State_get(applicationId){
 
   const sheet = FG_Utils_getSheet(
-  FG.SHEETS.POSTULACIONES
+  TALENTRY.SHEETS.POSTULACIONES
 );
 
   const data = sheet.getDataRange().getValues();
@@ -177,7 +177,7 @@ function FG_State_test(){
   Logger.log(
 
     FG_State_getNext(
-  FG.STATUS.NUEVA
+  TALENTRY.STATUS.NUEVA
 )
 
   );

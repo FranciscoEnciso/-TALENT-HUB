@@ -34,7 +34,7 @@ const FG_APPLICATION_COLUMNS = {
 function FG_Application_getSheet() {
 
   return FG_Utils_getSheet(
-  FG.SHEETS.POSTULACIONES
+  TALENTRY.SHEETS.POSTULACIONES
 );
 
 }
@@ -105,13 +105,13 @@ function FG_Application_buildRow(app){
     app.motivoSalidaAnterior || "",
 
     // P
-    app.prioridad || FG.PRIORITY.MEDIA,
+    app.prioridad || TALENTRY.PRIORITY.MEDIA,
 
     // Q
     app.score || "",
 
     // R
-    app.estado || FG.STATUS.NUEVA,
+    app.estado || TALENTRY.STATUS.NUEVA,
 
     // S
     app.motivoDescarte || "",

@@ -57,7 +57,7 @@ function FG_Repository_getCandidate(candidateId){
 
   return FG_Repository_findBy(
 
-    FG.SHEETS.CANDIDATOS,
+    TALENTRY.SHEETS.CANDIDATOS,
 
     "Candidate_ID",
 
@@ -74,7 +74,7 @@ function FG_Repository_getApplication(applicationId){
 
   return FG_Repository_findBy(
 
-    FG.SHEETS.POSTULACIONES,
+    TALENTRY.SHEETS.POSTULACIONES,
 
     "Application_ID",
 
@@ -91,7 +91,7 @@ function FG_Repository_getApplications(){
 
   return FG_Repository_getAll(
 
-    FG.SHEETS.POSTULACIONES
+    TALENTRY.SHEETS.POSTULACIONES
 
   );
 
@@ -104,7 +104,7 @@ function FG_Repository_getCandidates(){
 
   return FG_Repository_getAll(
 
-    FG.SHEETS.CANDIDATOS
+    TALENTRY.SHEETS.CANDIDATOS
 
   );
 
@@ -132,7 +132,7 @@ function FG_Repository_getInterviews(){
 
   return FG_Repository_getAll(
 
-    FG.SHEETS.ENTREVISTAS
+    TALENTRY.SHEETS.ENTREVISTAS
 
   );
 
@@ -228,7 +228,7 @@ function FG_Repository_countInterviews(){
 function FG_Repository_countHires(){
 
   return FG_Repository_getApplicationsByStatus(
-    FG.STATUS.CONTRATADO
+    TALENTRY.STATUS.CONTRATADO
   ).length;
 
 }

@@ -25,7 +25,7 @@ const FG_CANDIDATE_COLUMNS = {
 function FG_Candidate_getSheet(){
 
   return FG_Utils_getSheet(
-    FG.SHEETS.CANDIDATOS
+    TALENTRY.SHEETS.CANDIDATOS
   );
 
 }
@@ -159,9 +159,9 @@ function FG_Candidate_buildRow(c,id){
 
     0,
 
-    FG.CANDIDATE_STATUS.NUEVO,
+    TALENTRY.CANDIDATE_STATUS.NUEVO,
 "",
-FG.TRAFFIC.VERDE,
+TALENTRY.TRAFFIC.VERDE,
 ""
 
   ];
@@ -222,7 +222,7 @@ function FG_Candidate_update(c){
   sheet.getRange(
   found.row,
   FG_CANDIDATE_COLUMNS.STATUS
-).setValue(FG.CANDIDATE_STATUS.REPOSTULACION);
+).setValue(TALENTRY.CANDIDATE_STATUS.REPOSTULACION);
 
   return found.id;
 

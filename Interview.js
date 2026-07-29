@@ -10,7 +10,7 @@
  */
 function FG_Interview_getSheet(){
 
-  return FG_Utils_getSheet(FG.SHEETS.ENTREVISTAS);
+  return FG_Utils_getSheet(TALENTRY.SHEETS.ENTREVISTAS);
 
 }
 
@@ -69,7 +69,7 @@ function FG_Interview_schedule(data){
 
  FG_State_change(
   data.applicationId,
-  FG.STATUS.ENTREVISTA_AGENDADA
+  TALENTRY.STATUS.ENTREVISTA_AGENDADA
 );
 
   FG_Audit_register({
@@ -81,7 +81,7 @@ action: FG_AUDIT.ACTIONS.CREATE,
 
     applicationId:data.applicationId,
 
-    newState:FG.STATUS.ENTREVISTA_AGENDADA,
+    newState:TALENTRY.STATUS.ENTREVISTA_AGENDADA,
 
     description:"Entrevista agendada."
 
@@ -99,7 +99,7 @@ function FG_Interview_finish(interviewId,resultado,observaciones){
   const sheet = FG_Interview_getSheet();
 
   const row = FG_Utils_findRow(
-    FG.SHEETS.ENTREVISTAS,
+    TALENTRY.SHEETS.ENTREVISTAS,
     1,
     interviewId
   );
@@ -122,12 +122,15 @@ sheet.getRange(
 
 sheet.getRange(
   row,
-  10
+  FG_INTERVIEW_COLUMNS.ESTADO
 ).setValue(
-  FG.STATUS.ENTREVISTA_REALIZADA
+  TALENTRY.STATUS.ENTREVISTA_REALIZADA
 );
 
-sheet.getRange(row,11).setValue(observaciones);
+sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.OBSERVACIONES
+).setValue(observaciones);
 const applicationId = sheet.getRange(
   row,
   FG_INTERVIEW_COLUMNS.APPLICATION_ID
@@ -135,7 +138,7 @@ const applicationId = sheet.getRange(
 
 FG_State_change(
   applicationId,
-  FG.STATUS.ENTREVISTA_REALIZADA
+  TALENTRY.STATUS.ENTREVISTA_REALIZADA
 );
 }
 
@@ -147,7 +150,7 @@ function FG_Interview_noShow(interviewId){
   const sheet = FG_Interview_getSheet();
 
   const row = FG_Utils_findRow(
-    FG.SHEETS.ENTREVISTAS,
+    TALENTRY.SHEETS.ENTREVISTAS,
     1,
     interviewId
   );
@@ -167,8 +170,11 @@ function FG_Interview_noShow(interviewId){
   sheet.getRange(
   row,
   FG_INTERVIEW_COLUMNS.ESTADO
-).setValue(FG.STATUS.NO_ASISTIO);
-  sheet.getRange(row,11).setValue("El candidato no asistió.");
+).setValue(TALENTRY.STATUS.NO_ASISTIO);
+  sheet.getRange(
+  row,
+  FG_INTERVIEW_COLUMNS.OBSERVACIONES
+).setValue("El candidato no asistió.");
 
   const applicationId = sheet.getRange(
   row,
@@ -177,7 +183,7 @@ function FG_Interview_noShow(interviewId){
 
 FG_State_change(
   applicationId,
-  FG.STATUS.NO_ASISTIO
+  TALENTRY.STATUS.NO_ASISTIO
 );
 }
 
@@ -187,7 +193,7 @@ FG_State_change(
 function FG_Interview_get(interviewId){
 
   const row = FG_Utils_findRow(
-    FG.SHEETS.ENTREVISTAS,
+    TALENTRY.SHEETS.ENTREVISTAS,
     1,
     interviewId
   );
@@ -199,7 +205,7 @@ function FG_Interview_get(interviewId){
   }
 
   return FG_Utils_getRow(
-    FG.SHEETS.ENTREVISTAS,
+    TALENTRY.SHEETS.ENTREVISTAS,
     row
   );
 
@@ -244,7 +250,7 @@ function FG_Interview_finish_test(){
 function FG_Interview_noShow_test(){
 
   FG_Interview_noShow(
-    "INT-20260727212246",
+    "INT-20260727212246"
   );
 
 }
